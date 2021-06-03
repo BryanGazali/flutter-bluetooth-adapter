@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:bluetoothadapter/bluetoothadapter.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Bluetoothadapter flutterbluetoothadapter = Bluetoothadapter();
-  StreamSubscription _btConnectionStatusListener, _btReceivedMessageListener;
   String _connectionStatus = "NONE";
   List<BtDevice> devices = [];
   String _recievedMessage;
@@ -32,18 +30,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   _startListening() {
-    _btConnectionStatusListener =
-        flutterbluetoothadapter.connectionStatus().listen((dynamic status) {
-      setState(() {
-        _connectionStatus = status.toString();
-      });
-    });
-    _btReceivedMessageListener =
-        flutterbluetoothadapter.receiveMessages().listen((dynamic newMessage) {
-      setState(() {
-        _recievedMessage = newMessage.toString();
-      });
-    });
   }
 
   @override
@@ -62,7 +48,7 @@ class _MyAppState extends State<MyApp> {
                   fit: FlexFit.tight,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: () async {
                         await flutterbluetoothadapter.startServer();
                       },
@@ -74,7 +60,7 @@ class _MyAppState extends State<MyApp> {
                   fit: FlexFit.tight,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: () async {
                         devices = await flutterbluetoothadapter.getDevices();
                         setState(() {});
@@ -117,7 +103,7 @@ class _MyAppState extends State<MyApp> {
                   fit: FlexFit.tight,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         flutterbluetoothadapter.sendMessage(
                             _controller.text ?? "no msg",

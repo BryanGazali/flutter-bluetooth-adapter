@@ -31,7 +31,7 @@ class Bluetoothadapter {
 
   /// Gets a Particular Paired from the list of paired devices from its Device(Mac) address
   Future<BtDevice?> getDevice(String address) async {
-    Map device =
+    Map? device =
         await _channel.invokeMethod('getBtDevice', {"address": address});
     if (device == null) {
       return null;
@@ -53,7 +53,7 @@ class Bluetoothadapter {
   }
 
   /// Starts Bluetooth Client, now the device works as a bluetooth client
-  Future<bool> startClient(int position, [bool isSecure = false]) async {
+  Future<bool> startClient(int? position, [bool? isSecure = false]) async {
     print("HERE $position");
     var result = await _channel.invokeMethod('startClient', {
       "index": position ?? 0,
@@ -63,8 +63,8 @@ class Bluetoothadapter {
   }
 
   /// Sends message from client to server and vice versa, byte by byte or as a data stream
-  Future<bool> sendMessage(String message, {required bool sendByteByByte}) async {
-    bool result = await _channel.invokeMethod('sendMessage', {
+  Future<bool> sendMessage(String? message, {required bool? sendByteByByte}) async {
+    bool? result = await _channel.invokeMethod('sendMessage', {
       "message": message ?? "",
       "sendByteByByte": sendByteByByte ?? false,
     });
