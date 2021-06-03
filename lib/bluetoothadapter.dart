@@ -30,7 +30,7 @@ class Bluetoothadapter {
   }
 
   /// Gets a Particular Paired from the list of paired devices from its Device(Mac) address
-  Future<BtDevice> getDevice(String address) async {
+  Future<BtDevice?> getDevice(String address) async {
     Map device =
         await _channel.invokeMethod('getBtDevice', {"address": address});
     if (device == null) {
@@ -63,7 +63,7 @@ class Bluetoothadapter {
   }
 
   /// Sends message from client to server and vice versa, byte by byte or as a data stream
-  Future<bool> sendMessage(String message, {bool sendByteByByte}) async {
+  Future<bool> sendMessage(String message, {required bool sendByteByByte}) async {
     bool result = await _channel.invokeMethod('sendMessage', {
       "message": message ?? "",
       "sendByteByByte": sendByteByByte ?? false,
@@ -84,8 +84,8 @@ class Bluetoothadapter {
 
 /// A Data structure to hold device information of a paired bluetooth device
 class BtDevice {
-  String address;
-  String name;
+  String address = "";
+  String name = "";
 
   BtDevice(this.address, this.name);
 
