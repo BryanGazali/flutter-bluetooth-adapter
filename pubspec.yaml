@@ -5,8 +5,8 @@ repository: https://github.com/BryanGazali/flutter-bluetooth-adapter
 homepage: https://github.com/BryanGazali/flutter-bluetooth-adapter
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.10.0"
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=1.24.0-6.0.pre"
 
 dependencies:
   flutter:
